@@ -26,8 +26,8 @@ namespace InternFselV2.Service.Queries.UserCommands
         public async Task<ObjectResult> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(request);
-            //var user = await _userRepository.GetbyId(request.Id);
-            var user = await _userRepository.Queryable.AsNoTracking().Include(x => x.Products).FirstOrDefaultAsync(a => a.Id == request.Id);
+            var user = await _userRepository.GetById(request.Id);
+            //var user = await _userRepository.Queryable.AsNoTracking().Include(x => x.Products).FirstOrDefaultAsync(a => a.Id == request.Id);
             if (user == null)
             {
                 return new ObjectResult(null){ StatusCode = StatusCodes.Status200OK };

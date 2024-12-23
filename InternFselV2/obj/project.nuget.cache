@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f7e8bzYTTE9ycrP1iMbRMb7geHJJKqdjL+Khxe0UI1dmoe2AyIhEV22abq4jL9+GYTkBSIXCAn3KNAzvk4or2Q==",
+  "dgSpecHash": "Um+UCzjvpAHjuYaTyxYlNIZ3oScJTisANJ2KZN5ep9/c9WH7OhVtYPd5zTSWieOo6P7B9sZddbenhsQKzMh2qg==",
   "success": true,
   "projectFilePath": "C:\\vuithoi\\Fsel\\internFselv2\\code\\InternFselV2\\InternFselV2\\InternFselV2.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.20\\microsoft.entityframeworkcore.abstractions.7.0.20.nupkg.sha512",
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.20\\microsoft.entityframeworkcore.analyzers.7.0.20.nupkg.sha512",
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.20\\microsoft.entityframeworkcore.design.7.0.20.nupkg.sha512",
+    "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.13\\microsoft.entityframeworkcore.inmemory.7.0.13.nupkg.sha512",
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.20\\microsoft.entityframeworkcore.relational.7.0.20.nupkg.sha512",
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.20\\microsoft.entityframeworkcore.sqlserver.7.0.20.nupkg.sha512",
     "C:\\Users\\LONG_MADA\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.20\\microsoft.entityframeworkcore.tools.7.0.20.nupkg.sha512",

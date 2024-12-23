@@ -79,3 +79,4 @@ C:\vuithoi\Fsel\internFselv2\code\InternFselV2\InternFselV2\bin\Debug\net7.0\Med
 C:\vuithoi\Fsel\internFselv2\code\InternFselV2\InternFselV2\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\vuithoi\Fsel\internFselv2\code\InternFselV2\InternFselV2\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\vuithoi\Fsel\internFselv2\code\InternFselV2\InternFselV2\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\vuithoi\Fsel\internFselv2\code\InternFselV2\InternFselV2\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll
