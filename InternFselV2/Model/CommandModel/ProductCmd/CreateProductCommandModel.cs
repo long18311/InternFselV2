@@ -11,5 +11,6 @@ namespace InternFselV2.Model.CommandModel.ProductCmd
         public string? Name { get; set; }
         public int Price { get; set; }
         public string? Description { get; set; }
+        //public EnumCMSSourceData SourceData { get; set; }
     }
 }

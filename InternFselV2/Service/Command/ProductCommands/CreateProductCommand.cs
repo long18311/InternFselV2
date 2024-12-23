@@ -47,7 +47,7 @@ namespace InternFselV2.Service.Command.ProductCommands
                 }
             }
                   
-            product = await _productRepository.Create(product);
+            product = await _productRepository.CreateAsync(product);
             var result = _mapper.Map<ProductModel>(product);
             return new ObjectResult(result) { StatusCode = StatusCodes.Status201Created };
         }

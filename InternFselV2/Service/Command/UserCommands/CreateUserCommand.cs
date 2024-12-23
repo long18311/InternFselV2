@@ -32,7 +32,7 @@ namespace InternFselV2.Service.Command.UserCommands
                 return new ObjectResult(new {Error = "UserName đã tồn tại" }) { StatusCode = StatusCodes.Status400BadRequest };
             }
             user = _mapper.Map<User>(request);
-            user = await _userRepository.Create(user);
+            user = await _userRepository.CreateAsync(user);
             if(user == null) {
                 return new ObjectResult(new { Error = "Lỗi hệ thống" }) { StatusCode = StatusCodes.Status400BadRequest };
             }

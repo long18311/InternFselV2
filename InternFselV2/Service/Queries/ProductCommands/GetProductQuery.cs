@@ -28,7 +28,7 @@ namespace InternFselV2.Service.Queries.ProductCommands
         {
             ArgumentNullException.ThrowIfNull(request);
             //var user = await _userRepository.GetbyId(request.Id);
-            var user = await _productRepository.Queryable.Include(a => a.CreatedUser).FirstOrDefaultAsync(a => a.Id == request.Id);
+            var user = await _productRepository.Queryable.Include(a => a.CreatedUser).FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken);
             if (user == null)
             {
                 return new ObjectResult(null){ StatusCode = StatusCodes.Status200OK };

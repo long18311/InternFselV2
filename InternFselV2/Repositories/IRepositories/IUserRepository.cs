@@ -1,4 +1,5 @@
 ﻿using InternFselV2.Entities;
+using InternFselV2.Model.Interfaces;
 using InternFselV2.Model.QueryModel;
 
 namespace InternFselV2.Repositories.IRepositories

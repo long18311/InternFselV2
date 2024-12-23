@@ -4,6 +4,7 @@ using InternFselV2.Service.Queries.UserCommands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace InternFselV2.Controllers
 {
@@ -24,6 +25,16 @@ namespace InternFselV2.Controllers
             var result = await _mediator.Send(command).ConfigureAwait(false);
             return result;
         }
+        [HttpPost("SQL")]
+        [Authorize]
+        public async Task<IActionResult> CreateSQL([FromBody] CreateProductSQLCommand command)
+        {
+            var result = await _mediator.Send(command).ConfigureAwait(false);
+            if(result.StatusCode == StatusCodes.Status200OK && result.Value != null) return File((byte[])result.Value, "application/sql", "export_create_product.sql");
+            return result;
+        }
+
+
         [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateProductCommand command)
