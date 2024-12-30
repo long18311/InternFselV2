@@ -19,12 +19,6 @@ namespace InternFselV2
         public InternV2DbContext(DbContextOptions options) : base(options)
         {
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-GSDMP53\\VANLONG;Initial Catalog=InternV2;Integrated Security=True; TrustServerCertificate=true;");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
