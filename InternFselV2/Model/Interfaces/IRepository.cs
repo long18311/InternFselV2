@@ -19,6 +19,7 @@ namespace InternFselV2.Model.Interfaces
         public Task<TEntity?> CreateAsync(TEntity entity);
         public Task<TEntity?> UpdateAsync(TEntity entity);
         public Task<bool> DeleteAsync(TEntity entity);
+        public string GetSQLCreateEntity<T>(T entity) where T : Entity;
 
     }
 }

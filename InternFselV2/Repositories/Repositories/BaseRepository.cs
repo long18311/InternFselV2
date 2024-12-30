@@ -6,6 +6,9 @@ using System.Data;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
+using System.Collections;
 
 namespace InternFselV2.Repositories.Repositories
 {
@@ -222,7 +225,45 @@ namespace InternFselV2.Repositories.Repositories
                 }
             }).ConfigureAwait(continueOnCapturedContext: false);
         }
+        public string GetSQLCreateEntity<T>(T entity) where T : Entity
+        {
+            string sql = $"INSERT INTO [{_internV2DbContext.Database.GetDbConnection().Database}].[dbo].[{_internV2DbContext.Model.FindEntityType(typeof(T))?.GetTableName()}]";
+            if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
+            var properties = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => !p.IsDefined(typeof(NotMappedAttribute), true) && (!typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p != typeof(string)) && !typeof(Entity).IsAssignableFrom(p.PropertyType));
+            List<string> fields = new List<string>();
+            List<string> values = new List<string>();
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(entity);
+                if (value != null)
+                {
+                    fields.Add($"[{prop.Name}]");
+                    if (NumericType.Contains(prop.PropertyType))
+                    {
+                        values.Add(value.ToString()!);
+                    }
+                    else if (prop.PropertyType == typeof(string) || prop.PropertyType.IsEnum)
+                    {
+                        value = value.ToString()?.Replace("'", "''");
+                        values.Add($"N'{value}'");
+                    }
+                    else
+                    {
+                        values.Add($"'{value}'");
+                    }
 
+                }
+            }
+            sql = sql + '(' + string.Join(',', fields.Where(x => !string.IsNullOrEmpty(x)).ToList()) + ") VALUES (" + string.Join(',', values.Where(x => !string.IsNullOrEmpty(x)).ToList()) + ")";
+            return sql;
+        }
+        private static readonly HashSet<Type> NumericType = new HashSet<Type>
+        {
+            typeof(byte), typeof(sbyte), typeof(short), typeof(ushort),
+            typeof(int), typeof(uint), typeof(long), typeof(ulong),
+            typeof(float), typeof(double), typeof(decimal)
+        };
 
 
 
