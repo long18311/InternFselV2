@@ -16,7 +16,7 @@ namespace InternFselV2.Controllers
             _mediator = mediator;
         }
         //cở bản
-        //tạo Thread
+        //tạo Thread là luồng
         [HttpPost]        
         public IActionResult Create()
         {
@@ -29,7 +29,7 @@ namespace InternFselV2.Controllers
             t.Start();
             return Ok();
         }
-        //tạo sử dụng Thread.Sleep(second * 1000);
+        //tạo sử dụng Thread.Sleep(); cơ chế dừng luồng trong 1 khoảng tg
         [HttpPost("seconds")]
         public IActionResult CreateInt([FromQuery] int second)
         {
@@ -47,7 +47,7 @@ namespace InternFselV2.Controllers
             t2.Start();
             return Ok("thanks");
         }
-        // Task cở bản
+        // Task cở bản giống Thread nhưng có nhiều tác cơ chết hơn(đợi)
         [HttpPost("total")]
         public Task CreateTotal([FromQuery] int first, [FromQuery] int second)
         {
@@ -61,7 +61,7 @@ namespace InternFselV2.Controllers
             });
         }
         //Trung bình
-        //Chia sẻ dữ liệu giữa các Thread
+        //Chia sẻ dữ liệu giữa các Thread : dùng biến chung
         private static int _id = 0;
         [HttpPost("Id")]
         public IActionResult AddId([FromQuery] int id)
@@ -97,7 +97,7 @@ namespace InternFselV2.Controllers
             Console.WriteLine($"{Thread.CurrentThread.Name} : {a}");
             return Ok(a);
         }
-        //Tạo và chạy nhiều Task song song
+        //Tạo và chạy nhiều Task song song: chạy nhiều task cùng lúc
         [HttpGet("totalTask")]
         public IActionResult CreateTotalTask()
         {
@@ -141,7 +141,7 @@ namespace InternFselV2.Controllers
             });
             return Ok(a);
         }
-        //Kết hợp Task với async/await
+        //Kết hợp Task với async/await cơ thế đợi( đợ 1 task chạy xong thì mới chạy tiếp) của Task 
         [HttpGet("create3api")]
         public async Task<IActionResult> Create3APIAsync()
         {
@@ -175,7 +175,7 @@ namespace InternFselV2.Controllers
             Console.WriteLine($"{apiNumber}thật sao");
         }
         // nâng cao
-        //Thread Pool
+        //Thread Pool : có chứa sẵn nhiều Thread có sẵn để dùng, tránh việc, khởi tạo và tắt Thread liên tục
         [HttpGet("thread-pool")]
         public IActionResult CreateThreadPool()
         {
@@ -217,7 +217,7 @@ namespace InternFselV2.Controllers
             /*CountdownEvent countdown = (CountdownEvent)state;
             countdown.Signal();*/
         }
-        // mảng task
+        // Task với kết quả trả về (Task<T>): theo cở chế chờ để láu ra dữ liệu của task( giao cho task(1 luồng) sử lí 1 biến số và lấy lại kết của task đó sau sử lý)
         [HttpGet("create4api")]
         public async Task<IActionResult> Create4API([FromQuery] int first, [FromQuery] int second)
         {
@@ -237,7 +237,7 @@ namespace InternFselV2.Controllers
 
             return Ok(result);
         }
-        // dừng task
+        // dừng task : khi cancellationTokent.IsCancellationRequested trả về true tức là dùng
         [HttpGet("stopapi")]
         public async Task<IActionResult> Stopapi([FromQuery] int first)
         {
@@ -263,7 +263,7 @@ namespace InternFselV2.Controllers
 
             return Ok(a);
         }
-        // dùng Parallel
+        // dùng Parallel : giống như For/ForEach nhưng chạy nhiều luồn và code chạy lâu việc phân luồng sẽ rút ngăn tg, cẩn thận với việc đáp án của lượt lặp này ảnh hưởng tới lượt lặp sau
         [HttpGet("parallel")]
         public async Task<IActionResult> Darallel()
         {
