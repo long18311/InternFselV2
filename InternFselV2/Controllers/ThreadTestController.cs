@@ -106,38 +106,38 @@ namespace InternFselV2.Controllers
 
             Task.Run(() =>
             {
-                Console.WriteLine($"statst t1:");
+                Console.WriteLine($"Task t1:");
                 Thread.Sleep(1000);
                 a = rnd.Next()%1000;
-                Console.WriteLine($"t1 {a} tổng là: {(a * (a + 1)) / 2}");
+                Console.WriteLine($"t1 {a} total: {(a * (a + 1)) / 2}");
             });
             Task.Run(() =>
             {
-                Console.WriteLine($"statst t2:");
+                Console.WriteLine($"Task t2:");
                 Thread.Sleep(2000);
                 a = rnd.Next() % 1000;
-                Console.WriteLine($"t2 {a} tổng là: {(a * (a + 1)) / 2}");
+                Console.WriteLine($"t2 {a} total: {(a * (a + 1)) / 2}");
             });
             Task.Run(() =>
             {
-                Console.WriteLine($"statst t3:");
+                Console.WriteLine($"Task t3:");
                 Thread.Sleep(3000);
                 a = rnd.Next() % 1000;
-                Console.WriteLine($"t3 {a} tổng là: {(a * (a + 1)) / 2}");
+                Console.WriteLine($"t3 {a} total: {(a * (a + 1)) / 2}");
             });
             Task.Run(() =>
             {
-                Console.WriteLine($"statst t4:");
+                Console.WriteLine($"Task t4:");
                 Thread.Sleep(4000);
                 a = rnd.Next() % 1000;
-                Console.WriteLine($"t4 {a} tổng là: {(a * (a + 1)) / 2}");
+                Console.WriteLine($"t4 {a} total: {(a * (a + 1)) / 2}");
             });
             Task.Run(() =>
             {
-                Console.WriteLine($"statst t5:");
+                Console.WriteLine($"Task t5:");
                 Thread.Sleep(5000);
                 a = rnd.Next() % 1000;
-                Console.WriteLine($"t5 {a} tổng là: {(a * (a + 1)) / 2}");
+                Console.WriteLine($"t5 {a} total: {(a * (a + 1)) / 2}");
             });
             return Ok(a);
         }
@@ -147,16 +147,16 @@ namespace InternFselV2.Controllers
         {
 
             var tasks = new Task[3];
-            Console.WriteLine("băt dầu");
+            Console.WriteLine("Start");
             for (int i = 0; i < 3; i++)
             {
                 int apiNumber = i + 1;
                 tasks[i] = RunApi(apiNumber);
             }
-            Console.WriteLine("kết thúc");
+            Console.WriteLine("end");
             await Task.WhenAll(tasks);
 
-            Console.WriteLine("kết thúc v2");
+            Console.WriteLine("end All API");
             return Ok();
         }
         private async Task RunApi(int apiNumber)
@@ -172,26 +172,18 @@ namespace InternFselV2.Controllers
             });
             tacVu.Start();
             await tacVu;
-            Console.WriteLine($"{apiNumber}thật sao");
+            Console.WriteLine($"{apiNumber} later await");
         }
         // nâng cao
         //Thread Pool : có chứa sẵn nhiều Thread có sẵn để dùng, tránh việc, khởi tạo và tắt Thread liên tục
         [HttpGet("thread-pool")]
         public IActionResult CreateThreadPool()
         {
-            // Create a CountdownEvent with an initial count of 2
-            //CountdownEvent countdown = new CountdownEvent(1);
             Stopwatch w = new Stopwatch();
             
             ThreadPool.QueueUserWorkItem(WorkItem1, "Hello");    
             w.Start();
             ThreadPool.QueueUserWorkItem(Sun, Tuple.Create(1000000, w));
-            
-            
-            //countdown.Wait();
-            // Wait for the work items to complete
-
-
             Console.WriteLine("Main thread exits");
             return Ok();
         }
@@ -209,13 +201,10 @@ namespace InternFselV2.Controllers
                 Console.WriteLine($"Time {data.Item2.ElapsedMilliseconds} Milliseconds");
             }
         }
-        // A work item that prints a message
         private void WorkItem1(object state)
         {
             Thread.Sleep(1000);
             Console.WriteLine("WorkItem1: {0}", state);
-            /*CountdownEvent countdown = (CountdownEvent)state;
-            countdown.Signal();*/
         }
         // Task với kết quả trả về (Task<T>): theo cở chế chờ để láu ra dữ liệu của task( giao cho task(1 luồng) sử lí 1 biến số và lấy lại kết của task đó sau sử lý)
         [HttpGet("create4api")]
@@ -269,9 +258,9 @@ namespace InternFselV2.Controllers
         {
             var ads = new int[100];
             Parallel.For(0, 100, i => { ads[i] = i; });
-            Console.WriteLine("chưa thêm");
+            Console.WriteLine("not plus 10");
             Parallel.ForEach(ads, ad => { Thread.Sleep(500); Console.WriteLine(ad); });
-            Console.WriteLine("đã thêm");
+            Console.WriteLine("plus");
             Parallel.ForEach(ads, ad => { ad = ad + 10; Thread.Sleep(1000); Console.WriteLine(ad); });
             return Ok();
         }
